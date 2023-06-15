@@ -71,15 +71,19 @@ function inverterString() {
 //ENCONTRAR O MAIOR ELEMENTO EM UM VETOR
 
 function maiorVetor() {
-    var valor1 = parseFloat(prompt('Insira um valor:'));
-    var valor2 = parseFloat(prompt('Insira outro valor:'));  
-    var valor3 = parseFloat(prompt('Insira outro valor:'));  
-    var valor4 = parseFloat(prompt('Insira outro valor:'));  
-    var valor5 = parseFloat(prompt('Insira outro valor:'));
+    //criação do vetor, por isso o []
+    var vetor = []
+    
+    //loop para perguntar quais serão os elementos do vetor, o loop vai repetir 5 vezes
+    for (i = 0 ; i < 5 ; i++) {
+        var elementos = parseFloat(prompt('Insira o '+ (i+1)+ '/5 elemento:'));
+        //esse .push() vai levar o elemento escrito para o arrey vetor = []
+        vetor.push(elementos);
+    }
 
-    var vetores = [valor1, valor2, valor3, valor4, valor5]
-
-    var maiorValor = Math.max(...vetores)
+    /*... significa que os elementos do vetor vão se tornar argumentos, ou seja, sendo todos separados (é muito usado em conjunto com o Max e Min)
+    Math.max vai informar qual é o maior elemento dentre todos os descritos*/
+    var maiorValor = Math.max(...vetor)
     
     alert('O maior dos valores escritos é: '+ maiorValor)
 }
@@ -88,21 +92,181 @@ function maiorVetor() {
 //MAIOR, MENOR E MÉDIA
 
 function vetores() {
-    var valor1 = parseFloat(prompt('Insira um valor:'));
-    var valor2 = parseFloat(prompt('Insira outro valor:'));  
-    var valor3 = parseFloat(prompt('Insira outro valor:'));  
-    var valor4 = parseFloat(prompt('Insira outro valor:'));  
-    var valor5 = parseFloat(prompt('Insira outro valor:'));
+    var vetores = []
 
-    var vetores = [valor1, valor2, valor3, valor4, valor5]
+    for(i = 0; i < 5 ; i++){
+        var elemento = parseFloat(prompt('Insira o ' + (i + 1) + ' elemento:'));
+        vetores.push(elemento);
+    }
 
-    var maiorValor = Math.max(...vetores)
-    var menorValor = Math.min(...vetores)
-    var media = (valor1 + valor2 + valor3 + valor4 + valor5) / 5
+    var maiorValor = Math.max(...vetores);
+    //Math.min retorna o menor dos argumentos, ... transforma todos os vetores do array em argumentos
+    var menorValor = Math.min(...vetores);
+    //para calcular a média com vetores dentro de um array é mais complicado, um método bem usado é com o .reduce
+    //vetores.length vai informar quantos elementos tem dentro do array
+    var media = vetores.reduce(function(total, valor){return total + valor}, 0) / vetores.length
 
     alert('O maior dos valores escritos é '+ maiorValor + ', o menor valor é '+ menorValor + ' e a média é '+media)
 }
 
 
 //QUESTÃO 5
-//
+//Contar a frequência dos elementos em uma matriz
+
+function elementosMatriz() {
+    //criação da matriz chamada frequencia
+    var frequencia = {};
+    var vetores = []
+
+    //loop que vai repetir 7 vezes e pegar todos os elementos escritos e joga-los para o arrey vetores
+    for(i = 0; i < 7; i++) {
+        var elementos = parseFloat(prompt('Insira o '+ (i+1)+ '/7 elemento'));
+        vetores.push(elementos);
+    }
+
+    //esse loop ocorre o número de elementos fornecidos
+    for (i = 0; i < vetores.length; i++) {
+        //a variável elemento vai ser igual ao elemento indicado na ordem do vetor i
+        var elemento = vetores[i];
+        //caso o número exista dentro da matriz frequencia, é adicionado +1 ao elemento na matriz
+        if(frequencia[elemento]){
+            frequencia[elemento]++;
+            //caso o número não exista, sua contagem começa a ser =1
+        } else {
+            frequencia[elemento] = 1;
+        }
+        
+    }
+    //depois de pesquisar muito, foi a unica forma de demonstrar corretamento a mesma coisa que aparece em console.log(frequencia)
+    alert('A frequência dos elementos descrita é: '+ JSON.stringify(frequencia));
+
+}
+
+//QUESTÃO 6
+//Validar uma senha
+
+function validarSenha() {
+    //campo da senha
+    var senha = prompt('Digite sua senha:')
+    //foi atribuido o valor de falso para as 3 variáveis antes de realmente valida-las para que tenham o valor de boolean
+    var maiuscula = false
+    var minuscula = false
+    var numero = false
+
+    //caso a senha seja menor de 8 digitos o código ja interrompe, caso tenha mais ele continua
+    if(senha.length < 8) {
+        alert('Sua senha precisa de pelo menos 8 caracteres!');
+        } else {
+    //foi criado um loop que repete o número total de caracteres da senha
+    for(i = 0; i < senha.length; i++){
+        //variável caractere é igual ao caractere da senha na casa do número do loop que está ocorrendo
+        var caractere = senha[i];
+        
+    //caso qualquer caracter seja maiúsculo (esteja entre A e Z) ele mudara o valor para true
+    if(caractere >= 'A' && caractere <= 'Z') {
+        maiuscula = true
+    //caso qualquer caracter seja minúsculo (esteja entre a e z) ele mudara o valor para true
+    } else if(caractere >= 'a' && caractere <= 'z') {
+        minuscula = true
+    //caso qualquer caracter seja um número (esteja entre 0 e 1) ele mudara o valor para true
+    } else if(caractere >= '0' && caractere <= '9') {
+        numero = true
+    }  }  
+
+    //a senha será falsa e terá um aviso caso qualquer uma das 3 variáveis não tiverem alterado para true
+    if (maiuscula == false) {
+        alert('Está faltando letra maiúscula!!!')
+    }
+    if (minuscula == false) {
+        alert('Está faltando letra minúscula!!!')
+    }
+    if (numero == false ) {
+        alert('Está faltando números!!!')
+    }}
+}
+
+
+//QUESTÃO 7
+//Remover elementos duplicados da matriz
+
+function removerDuplicados() {
+    var vetores7 = [];
+
+    for (i=0;i<7;i++) {
+        var elementos7 = parseFloat(prompt('Digite um número ('+ (i+1)+'/7):'));
+        vetores7.push(elementos7);
+    }
+
+    var vetores72 = [];
+
+    for (i = 0; i < vetores7.length; i++) {
+        var elemento7 = vetores7[i];
+        
+        if(vetores72.indexOf(elemento7) === -1) {
+            vetores72.push(elemento7)
+        }
+    }
+    
+    alert('Retirando todos os números iguais, nós temos: '+vetores72)
+}
+
+//QUESTÃO 8
+
+//QUESTÃO 9
+//Calcular fatorial
+
+function calcularFatorial() {
+    var numero9 = parseFloat(prompt('Digite um número e vou calcular sua fatorial:'));
+    var resultado = 1;
+
+    for(i = 1; i <= numero9; i++) {
+        resultado *= i;
+    }console.log(resultado);
+}
+
+//QUESTÃO 10
+
+//QUESTÃO 11
+//Converter C para F
+
+function converterTemp() {
+    var temp = parseFloat(prompt('Digita o valor da temperatura em °C: '));
+
+    var fahrenheit = (temp * 1.8) + 32;
+    alert('O valor '+ temp + ' em fahrenheit é igual a: ' + fahrenheit);
+}
+
+//QUESTÃO 12
+//Verificar se um número é quadrado perfeito
+
+function verificarQuadrado() {
+    var numero12 = parseFloat(prompt('Digite um número e vou informar se ele é um quadrado perfeito'));
+
+    if(numero12 < 0) {
+        alert('números negativos não são quadrados perfeitos')
+    } else{
+        var raiz = Math.sqrt(numero12);
+        if(Number.isInteger(raiz)){
+            alert('Esse número é um quadrado perfeito!!')
+        } else {
+            alert('Esse número não é um quadrado perfeito')
+        }
+    }
+}
+
+//QUESTÃO 13
+
+//QUESTÃO 14
+
+//QUESTÃO 15
+//Geração de cores aleatórias
+
+function coresAleatorias() {
+    const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
+    var hexCor = "#";
+    
+    for (i = 0; i < 6 ; i++) {
+        hexCor += hex[Math.floor(Math.random() * hex.length)]
+    }
+    document.getElementById('questao15').style.backgroundColor = hexCor;
+}
